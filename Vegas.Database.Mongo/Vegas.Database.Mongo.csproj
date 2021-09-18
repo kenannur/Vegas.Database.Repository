@@ -1,9 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <Authors>Kenan Nur</Authors>
+    <Owners>Kenan Nur</Owners>
+    <PackageTags>Mongo MongoDB Database</PackageTags>
+    <Title>Vegas.Database.Mongo</Title>
+    <PackageId>Vegas.Database.Mongo</PackageId>
+    <RepositoryUrl>https://github.com/kenannur/Vegas.Database.Repository</RepositoryUrl>
+    <PackageVersion>1.0.0</PackageVersion>
   </PropertyGroup>
-
   <ItemGroup>
     <None Remove="MongoDB.Driver" />
     <None Remove="Entity\" />
@@ -11,6 +16,7 @@
     <None Remove="DependencyInjection\" />
     <None Remove="Repository\" />
     <None Remove="Microsoft.Extensions.DependencyInjection" />
+    <None Remove="NuGet.Build.Packaging" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MongoDB.Driver" Version="2.13.1" />
