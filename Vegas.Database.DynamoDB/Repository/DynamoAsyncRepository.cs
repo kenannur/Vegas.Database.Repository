@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DataModel;
+using Amazon.DynamoDBv2.Model;
 using Vegas.Database.DynamoDB.Entity;
 
 namespace Vegas.Database.DynamoDB.Repository
@@ -13,11 +14,20 @@ namespace Vegas.Database.DynamoDB.Repository
         protected readonly IAmazonDynamoDB Client;
         protected readonly IDynamoDBContext Context;
 
-
         public DynamoAsyncRepository(IAmazonDynamoDB client, IDynamoDBContext context)
         {
             Client = client;
             Context = context;
+        }
+
+        public async Task CreateTableAsync(CreateTableRequest request, CancellationToken ct = default)
+        {
+            await Client.CreateTableAsync(request, ct);
+        }
+
+        public async Task UpdateTableAsync(UpdateTableRequest request, CancellationToken ct = default)
+        {
+            await Client.UpdateTableAsync(request, ct);
         }
 
         public async Task<TEntity> AddAsync(TEntity entity, CancellationToken ct = default)
