@@ -2,7 +2,7 @@
 using MongoDB.Bson.Serialization.Attributes;
 using Vegas.Database.Abstraction.Entity;
 
-namespace Vegas.Database.Mongo.Entity
+namespace Vegas.Database.MongoDB.Entity
 {
     public abstract class MongoEntity : IEntity<string>
     {

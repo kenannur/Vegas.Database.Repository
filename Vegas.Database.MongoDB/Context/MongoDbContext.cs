@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using MongoDB.Driver;
 
-namespace Vegas.Database.Mongo.Context
+namespace Vegas.Database.MongoDB.Context
 {
     public sealed class MongoDbContext
     {

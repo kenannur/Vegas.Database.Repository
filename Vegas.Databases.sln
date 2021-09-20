@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.810.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vegas.Database.Abstraction", "Vegas.Database.Abstraction\Vegas.Database.Abstraction.csproj", "{34C8ABF0-0190-42F8-B6F7-E0FBA25F1977}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vegas.Database.Mongo", "Vegas.Database.Mongo\Vegas.Database.Mongo.csproj", "{A1B9A698-AB07-4752-94BC-81142BAD15C7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vegas.Database.MongoDB", "Vegas.Database.MongoDB\Vegas.Database.MongoDB.csproj", "{A1B9A698-AB07-4752-94BC-81142BAD15C7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vegas.Database.Relational", "Vegas.Database.Relational\Vegas.Database.Relational.csproj", "{4136D16F-4935-4E89-B45C-A2FBCA434040}"
 EndProject

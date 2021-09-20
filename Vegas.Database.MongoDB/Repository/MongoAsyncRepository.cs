@@ -4,10 +4,10 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using MongoDB.Driver;
-using Vegas.Database.Mongo.Context;
-using Vegas.Database.Mongo.Entity;
+using Vegas.Database.MongoDB.Context;
+using Vegas.Database.MongoDB.Entity;
 
-namespace Vegas.Database.Mongo.Repository
+namespace Vegas.Database.MongoDB.Repository
 {
     public class MongoAsyncRepository<TEntity> : IMongoAsyncRepository<TEntity>
         where TEntity : MongoEntity

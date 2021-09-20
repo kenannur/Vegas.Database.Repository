@@ -3,10 +3,10 @@ using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
-using Vegas.Database.Mongo.Context;
-using Vegas.Database.Mongo.Repository;
+using Vegas.Database.MongoDB.Context;
+using Vegas.Database.MongoDB.Repository;
 
-namespace Vegas.Database.Mongo.DependencyInjection
+namespace Vegas.Database.MongoDB.DependencyInjection
 {
     public static class MongoServiceCollectionExtensions
     {
