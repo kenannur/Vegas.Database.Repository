@@ -7,7 +7,7 @@
     <Title>Vegas.Database.RelationalDB</Title>
     <PackageId>Vegas.Database.RelationalDB</PackageId>
     <RepositoryUrl>https://github.com/kenannur/Vegas.Database.Repository</RepositoryUrl>
-    <PackageVersion>1.0.0</PackageVersion>
+    <PackageVersion>1.0.1</PackageVersion>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Repository\" />
