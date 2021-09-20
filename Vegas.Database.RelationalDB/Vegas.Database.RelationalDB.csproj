@@ -4,8 +4,8 @@
     <Authors>Kenan Nur</Authors>
     <Owners>Kenan Nur</Owners>
     <PackageTags>Database Relational PostgreSQL SqlServer</PackageTags>
-    <Title>Vegas.Database.Relational</Title>
-    <PackageId>Vegas.Database.Relational</PackageId>
+    <Title>Vegas.Database.RelationalDB</Title>
+    <PackageId>Vegas.Database.RelationalDB</PackageId>
     <RepositoryUrl>https://github.com/kenannur/Vegas.Database.Repository</RepositoryUrl>
     <PackageVersion>1.0.0</PackageVersion>
   </PropertyGroup>
