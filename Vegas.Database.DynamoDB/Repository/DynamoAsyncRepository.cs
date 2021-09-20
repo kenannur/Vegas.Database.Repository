@@ -20,8 +20,30 @@ namespace Vegas.Database.DynamoDB.Repository
             Context = context;
         }
 
-        public async Task CreateTableAsync(CreateTableRequest request, CancellationToken ct = default)
+        public async Task CreateTableAsync(CreateTableRequest request = default, CancellationToken ct = default)
         {
+            var tableName = typeof(TEntity).Name;
+            var tablesResponse = await Client.ListTablesAsync(ct);
+            if (tablesResponse.TableNames.Contains(tableName))
+            {
+                return;
+            }
+            if (request is null)
+            {
+                request = new CreateTableRequest
+                {
+                    TableName = tableName,
+                    AttributeDefinitions = new List<AttributeDefinition>
+                    {
+                        new AttributeDefinition("Id", ScalarAttributeType.S)
+                    },
+                    KeySchema = new List<KeySchemaElement>
+                    {
+                        new KeySchemaElement("Id", KeyType.HASH)
+                    },
+                    ProvisionedThroughput = new ProvisionedThroughput(2, 2)
+                };
+            }
             await Client.CreateTableAsync(request, ct);
         }
 
