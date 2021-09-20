@@ -9,7 +9,7 @@ namespace Vegas.Database.DynamoDB.Repository
     public interface IDynamoAsyncRepository<TEntity> : IAsyncRepository<TEntity, string>
         where TEntity : DynamoEntity
     {
-        Task CreateTableAsync(CreateTableRequest request, CancellationToken ct = default);
+        Task CreateTableAsync(CreateTableRequest request = default, CancellationToken ct = default);
 
         Task UpdateTableAsync(UpdateTableRequest request, CancellationToken ct = default);
     }
