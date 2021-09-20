@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Vegas.Database.Relational.Repository;
+using Vegas.Database.RelationalDB.Repository;
 
-namespace Vegas.Database.Relational.DependencyInjection
+namespace Vegas.Database.RelationalDB.DependencyInjection
 {
     public static class RelationalDatabasesServiceCollectionExtensions
     {

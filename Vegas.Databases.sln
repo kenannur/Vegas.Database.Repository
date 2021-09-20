@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vegas.Database.Abstraction"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vegas.Database.MongoDB", "Vegas.Database.MongoDB\Vegas.Database.MongoDB.csproj", "{A1B9A698-AB07-4752-94BC-81142BAD15C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vegas.Database.Relational", "Vegas.Database.Relational\Vegas.Database.Relational.csproj", "{4136D16F-4935-4E89-B45C-A2FBCA434040}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vegas.Database.RelationalDB", "Vegas.Database.RelationalDB\Vegas.Database.RelationalDB.csproj", "{4136D16F-4935-4E89-B45C-A2FBCA434040}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vegas.Database.DynamoDB", "Vegas.Database.DynamoDB\Vegas.Database.DynamoDB.csproj", "{FCD18FB7-05C5-43B0-91EB-E6CACC8741E5}"
 EndProject

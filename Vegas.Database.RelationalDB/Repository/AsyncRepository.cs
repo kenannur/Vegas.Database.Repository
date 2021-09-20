@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Vegas.Database.Relational.Entity;
+using Vegas.Database.RelationalDB.Entity;
 
-namespace Vegas.Database.Relational.Repository
+namespace Vegas.Database.RelationalDB.Repository
 {
     public class AsyncRepository<TEntity> : IAsyncRepository<TEntity>
         where TEntity : RelationalEntity

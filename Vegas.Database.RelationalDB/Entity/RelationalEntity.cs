@@ -1,7 +1,7 @@
 ﻿using System;
 using Vegas.Database.Abstraction.Entity;
 
-namespace Vegas.Database.Relational.Entity
+namespace Vegas.Database.RelationalDB.Entity
 {
     public class RelationalEntity : IEntity<long>
     {
