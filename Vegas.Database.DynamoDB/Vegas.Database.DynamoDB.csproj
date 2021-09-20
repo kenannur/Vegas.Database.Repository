@@ -1,15 +1,21 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <Authors>Kenan Nur</Authors>
+    <Owners>Kenan Nur</Owners>
+    <PackageTags>Database DynamoDB Amazon</PackageTags>
+    <Title>Vegas.Database.DynamoDB</Title>
+    <PackageId>Vegas.Database.DynamoDB</PackageId>
+    <RepositoryUrl>https://github.com/kenannur/Vegas.Database.Repository</RepositoryUrl>
+    <PackageVersion>1.0.0</PackageVersion>
   </PropertyGroup>
-
   <ItemGroup>
     <None Remove="DependencyInjection\" />
     <None Remove="Entity\" />
     <None Remove="Repository\" />
     <None Remove="AWSSDK.DynamoDBv2" />
     <None Remove="Microsoft.Extensions.DependencyInjection" />
+    <None Remove="NuGet.Build.Packaging" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DependencyInjection\" />
