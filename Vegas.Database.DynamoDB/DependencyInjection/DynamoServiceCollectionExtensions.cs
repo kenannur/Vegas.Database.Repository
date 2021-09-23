@@ -28,5 +28,11 @@ namespace Vegas.Database.DynamoDB.DependencyInjection
             services.AddSingleton<IDynamoDBContext, DynamoDBContext>();
             services.AddScoped(typeof(IDynamoAsyncRepository<>), typeof(DynamoAsyncRepository<>));
         }
+
+        public static void AddDynamoAsyncRepository(this IServiceCollection services,
+                                                    string accessKey, string secretKey, RegionEndpoint region)
+        {
+            AddDynamoAsyncRepository(services, new BasicAWSCredentials(accessKey, secretKey), region);
+        }
     }
 }
