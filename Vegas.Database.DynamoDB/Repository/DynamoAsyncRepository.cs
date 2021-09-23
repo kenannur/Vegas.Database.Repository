@@ -3,7 +3,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DataModel;
-using Amazon.DynamoDBv2.Model;
 using Vegas.Database.DynamoDB.Entity;
 
 namespace Vegas.Database.DynamoDB.Repository
@@ -18,38 +17,6 @@ namespace Vegas.Database.DynamoDB.Repository
         {
             Client = client;
             Context = context;
-        }
-
-        public async Task CreateTableAsync(CreateTableRequest request = default, CancellationToken ct = default)
-        {
-            var tableName = typeof(TEntity).Name;
-            var tablesResponse = await Client.ListTablesAsync(ct);
-            if (tablesResponse.TableNames.Contains(tableName))
-            {
-                return;
-            }
-            if (request is null)
-            {
-                request = new CreateTableRequest
-                {
-                    TableName = tableName,
-                    AttributeDefinitions = new List<AttributeDefinition>
-                    {
-                        new AttributeDefinition("Id", ScalarAttributeType.S)
-                    },
-                    KeySchema = new List<KeySchemaElement>
-                    {
-                        new KeySchemaElement("Id", KeyType.HASH)
-                    },
-                    ProvisionedThroughput = new ProvisionedThroughput(2, 2)
-                };
-            }
-            await Client.CreateTableAsync(request, ct);
-        }
-
-        public async Task UpdateTableAsync(UpdateTableRequest request, CancellationToken ct = default)
-        {
-            await Client.UpdateTableAsync(request, ct);
         }
 
         public async Task<TEntity> AddAsync(TEntity entity, CancellationToken ct = default)
