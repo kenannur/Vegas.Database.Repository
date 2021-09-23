@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -28,16 +29,16 @@ namespace Vegas.Database.RelationalDB.Repository
             await Context.SaveChangesAsync(ct);
         }
 
-        public async Task DeleteAsync(TEntity entity, CancellationToken ct = default)
+        public async Task DeleteAsync(long id, CancellationToken ct = default)
         {
-            ThrowIfNull(entity);
+            var entity = await GetAsync(id, ct);
             Context.Remove(entity);
             await Context.SaveChangesAsync(ct);
         }
 
-        public async Task DeleteManyAsync(IEnumerable<TEntity> entities, CancellationToken ct = default)
+        public async Task DeleteManyAsync(IEnumerable<long> ids, CancellationToken ct = default)
         {
-            ThrowIfNull(entities);
+            var entities = await Context.Set<TEntity>().Where(x => ids.Contains(x.Id)).ToListAsync(ct);
             Context.RemoveRange(entities);
             await Context.SaveChangesAsync(ct);
         }

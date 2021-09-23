@@ -14,10 +14,10 @@ namespace Vegas.Database.Abstraction.Repository
 
         Task<TEntity> GetAsync(TId id, CancellationToken ct = default);
 
-        Task DeleteAsync(TEntity entity, CancellationToken ct = default);
+        Task DeleteAsync(TId id, CancellationToken ct = default);
 
         Task AddManyAsync(IEnumerable<TEntity> entities, CancellationToken ct = default);
 
-        Task DeleteManyAsync(IEnumerable<TEntity> entities, CancellationToken ct = default);
+        Task DeleteManyAsync(IEnumerable<TId> ids, CancellationToken ct = default);
     }
 }

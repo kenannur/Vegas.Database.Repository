@@ -29,20 +29,20 @@ namespace Vegas.Database.DynamoDB.Repository
         {
             foreach (var entity in entities)
             {
-                await Context.SaveAsync(entity, ct);
+                await AddAsync(entity, ct);
             }
         }
 
-        public async Task DeleteAsync(TEntity entity, CancellationToken ct = default)
+        public async Task DeleteAsync(string id, CancellationToken ct = default)
         {
-            await Context.DeleteAsync(entity, ct);
+            await Context.DeleteAsync<TEntity>(id, ct);
         }
 
-        public async Task DeleteManyAsync(IEnumerable<TEntity> entities, CancellationToken ct = default)
+        public async Task DeleteManyAsync(IEnumerable<string> ids, CancellationToken ct = default)
         {
-            foreach (var entity in entities)
+            foreach (var id in ids)
             {
-                await Context.DeleteAsync(entity, ct);
+                await DeleteAsync(id, ct);
             }
         }
 

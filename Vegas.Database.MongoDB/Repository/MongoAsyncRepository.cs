@@ -28,16 +28,14 @@ namespace Vegas.Database.MongoDB.Repository
             await Context.Collection<TEntity>().InsertManyAsync(entities, default, ct);
         }
 
-        public async Task DeleteAsync(TEntity entity, CancellationToken ct = default)
+        public async Task DeleteAsync(string id, CancellationToken ct = default)
         {
-            ThrowIfNull(entity);
-            await Context.Collection<TEntity>().DeleteOneAsync(x => x.Id == entity.Id, ct);
+            await Context.Collection<TEntity>().DeleteOneAsync(x => x.Id == id, ct);
         }
 
-        public async Task DeleteManyAsync(IEnumerable<TEntity> entities, CancellationToken ct = default)
+        public async Task DeleteManyAsync(IEnumerable<string> ids, CancellationToken ct = default)
         {
-            ThrowIfNull(entities);
-            await Context.Collection<TEntity>().DeleteManyAsync(x => entities.Select(x => x.Id).Contains(x.Id), default, ct);
+            await Context.Collection<TEntity>().DeleteManyAsync(x => ids.Contains(x.Id), default, ct);
         }
 
         public virtual async Task<TEntity> GetAsync(string id, CancellationToken ct = default)
