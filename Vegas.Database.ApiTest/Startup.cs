@@ -25,7 +25,6 @@ namespace Vegas.Database.ApiTest
                 AccessKey = Configuration.GetValue<string>("DynamoDBSettings:AccessKey"),
                 SecretKey = Configuration.GetValue<string>("DynamoDBSettings:SecretKey"),
                 Region = Configuration.GetValue<string>("DynamoDBSettings:Region"),
-                CreateTables = true
             });
 
             services.AddControllers();
