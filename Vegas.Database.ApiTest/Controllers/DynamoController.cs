@@ -17,14 +17,14 @@ namespace Vegas.Database.ApiTest.Controllers
             _repository = repository;
         }
 
-        [HttpPost]
+        [HttpPost("Tables")]
         public async Task<IActionResult> CreateTablesAsync()
         {
             await _repository.CreateTablesAsync();
             return Ok();
         }
 
-        [HttpDelete]
+        [HttpDelete("Tables")]
         public async Task<IActionResult> DeleteTablesAsync()
         {
             await _repository.DeleteTablesAsync();
