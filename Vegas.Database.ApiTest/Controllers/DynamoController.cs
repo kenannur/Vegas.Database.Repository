@@ -17,8 +17,8 @@ namespace Vegas.Database.ApiTest.Controllers
             _repository = repository;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAsync()
+        [HttpPost]
+        public async Task<IActionResult> CreateTablesAsync()
         {
             await _repository.CreateTablesAsync();
             return Ok();
