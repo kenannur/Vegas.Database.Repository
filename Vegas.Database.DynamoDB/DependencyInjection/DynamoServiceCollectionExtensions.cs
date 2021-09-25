@@ -37,7 +37,10 @@ namespace Vegas.Database.DynamoDB.DependencyInjection
             services.AddSingleton<IDynamoDBContext, DynamoDBContext>();
             services.AddScoped(typeof(IDynamoAsyncRepository<>), typeof(DynamoAsyncRepository<>));
 
-            CreateTablesAsync(client).Wait();
+            if (settings.CreateTables)
+            {
+                CreateTablesAsync(client).Wait();
+            }
         }
 
         private static async Task CreateTablesAsync(AmazonDynamoDBClient client)
