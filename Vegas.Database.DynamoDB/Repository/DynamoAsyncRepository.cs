@@ -1,8 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DataModel;
+using Amazon.DynamoDBv2.Model;
 using Vegas.Database.DynamoDB.Entity;
 
 namespace Vegas.Database.DynamoDB.Repository
@@ -55,6 +60,69 @@ namespace Vegas.Database.DynamoDB.Repository
         {
             await Context.SaveAsync(entity, ct);
             return entity;
+        }
+
+
+        public async Task CreateTablesAsync()
+        {
+            var assemblyOfEntities = Assembly.GetCallingAssembly();
+            var typeOfEntities = assemblyOfEntities.GetTypes().Where(type => type.IsSubclassOf(typeof(DynamoEntity)));
+
+            var tablesResponse = await Client.ListTablesAsync();
+            if (tablesResponse.HttpStatusCode == HttpStatusCode.OK)
+            {
+                foreach (var typeOfEntity in typeOfEntities)
+                {
+                    if (tablesResponse.TableNames.Contains(typeOfEntity.Name))
+                    {
+                        continue;
+                    }
+                    await CreateTableAsync(typeOfEntity);
+                }
+            }
+        }
+
+        private async Task CreateTableAsync(Type typeOfEntity)
+        {
+            var request = new CreateTableRequest
+            {
+                TableName = typeOfEntity.Name,
+                AttributeDefinitions = new List<AttributeDefinition>
+                {
+                    new AttributeDefinition("Id", ScalarAttributeType.S),
+                },
+                KeySchema = new List<KeySchemaElement>
+                {
+                    new KeySchemaElement("Id", KeyType.HASH),
+                },
+                ProvisionedThroughput = new ProvisionedThroughput(readCapacityUnits: 1, writeCapacityUnits: 1)
+            };
+
+            var secondaryIndexProperties = typeOfEntity.GetProperties()
+                .Where(x => x.GetCustomAttribute<DynamoDBGlobalSecondaryIndexHashKeyAttribute>() is not null);
+            if (secondaryIndexProperties.Any())
+            {
+                request.GlobalSecondaryIndexes = new List<GlobalSecondaryIndex>();
+            }
+            foreach (var property in secondaryIndexProperties)
+            {
+                var scalarAttrType = new ScalarAttributeType(property.PropertyType.Name.ToUpper().First().ToString());
+                request.AttributeDefinitions.Add(new AttributeDefinition(property.Name, scalarAttrType));
+                request.GlobalSecondaryIndexes.Add(new GlobalSecondaryIndex
+                {
+                    IndexName = $"{property.Name}-index",
+                    Projection = new Projection
+                    {
+                        ProjectionType = ProjectionType.ALL
+                    },
+                    KeySchema = new List<KeySchemaElement>
+                    {
+                        new KeySchemaElement(property.Name, KeyType.HASH)
+                    },
+                    ProvisionedThroughput = new ProvisionedThroughput(readCapacityUnits: 1, writeCapacityUnits: 1)
+                });
+            }
+            await Client.CreateTableAsync(request);
         }
     }
 }
