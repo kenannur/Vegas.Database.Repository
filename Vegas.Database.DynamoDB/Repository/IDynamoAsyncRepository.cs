@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Reflection;
 using System.Threading.Tasks;
 using Vegas.Database.Abstraction.Repository;
 using Vegas.Database.DynamoDB.Entity;
@@ -10,7 +11,7 @@ namespace Vegas.Database.DynamoDB.Repository
     {
         Task<List<string>> GetTablesAsync();
 
-        Task CreateTablesAsync();
+        Task CreateTablesAsync(Assembly assembly);
 
         Task DeleteTablesAsync();
     }

@@ -85,10 +85,9 @@ namespace Vegas.Database.DynamoDB.Repository
             }
         }
 
-        public async Task CreateTablesAsync()
+        public async Task CreateTablesAsync(Assembly assembly)
         {
-            var assemblyOfEntities = Assembly.GetCallingAssembly();
-            var typeOfEntities = assemblyOfEntities.GetTypes().Where(type => type.IsSubclassOf(typeof(DynamoEntity)));
+            var typeOfEntities = assembly.GetTypes().Where(type => type.IsSubclassOf(typeof(DynamoEntity)));
 
             var tablesResponse = await Client.ListTablesAsync();
             if (tablesResponse.HttpStatusCode == HttpStatusCode.OK)

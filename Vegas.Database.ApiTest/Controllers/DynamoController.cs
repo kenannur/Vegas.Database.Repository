@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Reflection;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Vegas.Database.ApiTest.Entities;
 using Vegas.Database.DynamoDB.Repository;
@@ -25,7 +26,8 @@ namespace Vegas.Database.ApiTest.Controllers
         [HttpPost("Tables")]
         public async Task<IActionResult> CreateTablesAsync()
         {
-            await _repository.CreateTablesAsync();
+            var assembly = Assembly.GetExecutingAssembly();
+            await _repository.CreateTablesAsync(assembly);
             return Ok();
         }
 
