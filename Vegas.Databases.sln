@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vegas.Database.RelationalDB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vegas.Database.DynamoDB", "Vegas.Database.DynamoDB\Vegas.Database.DynamoDB.csproj", "{FCD18FB7-05C5-43B0-91EB-E6CACC8741E5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vegas.Database.ApiTest", "Vegas.Database.ApiTest\Vegas.Database.ApiTest.csproj", "{2D3AD6FB-79A3-48C9-8924-3A8196C18466}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{FCD18FB7-05C5-43B0-91EB-E6CACC8741E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FCD18FB7-05C5-43B0-91EB-E6CACC8741E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FCD18FB7-05C5-43B0-91EB-E6CACC8741E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D3AD6FB-79A3-48C9-8924-3A8196C18466}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D3AD6FB-79A3-48C9-8924-3A8196C18466}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D3AD6FB-79A3-48C9-8924-3A8196C18466}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D3AD6FB-79A3-48C9-8924-3A8196C18466}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
