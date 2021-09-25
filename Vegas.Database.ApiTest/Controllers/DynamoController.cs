@@ -1,40 +1,39 @@
 ﻿using System.Reflection;
 using System.Threading.Tasks;
+using Amazon.DynamoDBv2;
 using Microsoft.AspNetCore.Mvc;
-using Vegas.Database.ApiTest.Entities;
-using Vegas.Database.DynamoDB.Repository;
+using Vegas.Database.DynamoDB.Extensions;
 
 namespace Vegas.Database.ApiTest.Controllers
 {
     [Route("[controller]")]
     public class DynamoController : Controller
     {
-        private readonly IDynamoAsyncRepository<User> _repository;
+        private readonly IAmazonDynamoDB _client;
 
-        public DynamoController(IDynamoAsyncRepository<User> repository)
+        public DynamoController(IAmazonDynamoDB client)
         {
-            _repository = repository;
+            _client = client;
         }
 
         [HttpGet("Tables")]
         public async Task<IActionResult> GetTablesAsync()
         {
-            var result = await _repository.GetTablesAsync();
+            var result = await _client.GetTableNamesAsync();
             return Ok(result);
         }
 
         [HttpPost("Tables")]
         public async Task<IActionResult> CreateTablesAsync()
         {
-            var assembly = Assembly.GetExecutingAssembly();
-            await _repository.CreateTablesAsync(assembly);
+            await _client.CreateTablesAsync(Assembly.GetExecutingAssembly());
             return Ok();
         }
 
         [HttpDelete("Tables")]
         public async Task<IActionResult> DeleteTablesAsync()
         {
-            await _repository.DeleteTablesAsync();
+            await _client.DeleteTablesAsync();
             return Ok();
         }
 
