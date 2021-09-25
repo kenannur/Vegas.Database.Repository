@@ -17,12 +17,14 @@
     <None Remove="Microsoft.Extensions.DependencyInjection" />
     <None Remove="NuGet.Build.Packaging" />
     <None Remove="Setting\" />
+    <None Remove="Extensions\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DependencyInjection\" />
     <Folder Include="Entity\" />
     <Folder Include="Repository\" />
     <Folder Include="Setting\" />
+    <Folder Include="Extensions\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Vegas.Database.Abstraction\Vegas.Database.Abstraction.csproj" />
