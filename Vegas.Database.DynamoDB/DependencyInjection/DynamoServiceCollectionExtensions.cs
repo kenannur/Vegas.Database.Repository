@@ -22,11 +22,11 @@ namespace Vegas.Database.DynamoDB.DependencyInjection
                 throw new ArgumentNullException(nameof(settings));
             }
 
-            var region = RegionEndpoint.GetBySystemName(settings.Region);
-
             services.AddSingleton<IAmazonDynamoDB, AmazonDynamoDBClient>(sp =>
             {
-                return new AmazonDynamoDBClient(new BasicAWSCredentials(settings.AccessKey, settings.SecretKey), RegionEndpoint.EUNorth1);
+                var credentials = new BasicAWSCredentials(settings.AccessKey, settings.SecretKey);
+                var region = RegionEndpoint.GetBySystemName(settings.Region);
+                return new AmazonDynamoDBClient(credentials, region);
             });
             services.AddSingleton<IDynamoDBContext, DynamoDBContext>();
             services.AddScoped(typeof(IDynamoAsyncRepository<>), typeof(DynamoAsyncRepository<>));
