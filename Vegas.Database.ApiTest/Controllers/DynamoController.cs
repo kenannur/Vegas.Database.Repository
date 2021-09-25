@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Vegas.Database.ApiTest.Entities;
 using Vegas.Database.DynamoDB.Repository;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace Vegas.Database.ApiTest.Controllers
 {
     [Route("[controller]")]
@@ -15,6 +13,13 @@ namespace Vegas.Database.ApiTest.Controllers
         public DynamoController(IDynamoAsyncRepository<User> repository)
         {
             _repository = repository;
+        }
+
+        [HttpGet("Tables")]
+        public async Task<IActionResult> GetTablesAsync()
+        {
+            var result = await _repository.GetTablesAsync();
+            return Ok(result);
         }
 
         [HttpPost("Tables")]

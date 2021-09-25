@@ -62,6 +62,17 @@ namespace Vegas.Database.DynamoDB.Repository
             return entity;
         }
 
+        public async Task<List<string>> GetTablesAsync()
+        {
+            var tables = new List<string>();
+            var tablesResponse = await Client.ListTablesAsync();
+            if (tablesResponse.HttpStatusCode == HttpStatusCode.OK)
+            {
+                tables.AddRange(tablesResponse.TableNames);
+            }
+            return tables;
+        }
+
         public async Task DeleteTablesAsync()
         {
             var tablesResponse = await Client.ListTablesAsync();
