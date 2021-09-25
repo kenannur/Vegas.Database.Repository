@@ -8,5 +8,7 @@ namespace Vegas.Database.DynamoDB.Repository
         where TEntity : DynamoEntity
     {
         Task CreateTablesAsync();
+
+        Task DeleteTablesAsync();
     }
 }

@@ -24,5 +24,12 @@ namespace Vegas.Database.ApiTest.Controllers
             return Ok();
         }
 
+        [HttpDelete]
+        public async Task<IActionResult> DeleteTablesAsync()
+        {
+            await _repository.DeleteTablesAsync();
+            return Ok();
+        }
+
     }
 }
