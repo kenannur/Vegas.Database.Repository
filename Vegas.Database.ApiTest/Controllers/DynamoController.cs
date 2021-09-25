@@ -6,31 +6,27 @@ using Vegas.Database.DynamoDB.Extensions;
 
 namespace Vegas.Database.ApiTest.Controllers
 {
-    [Route("[controller]")]
+    [Route("[controller]/Tables")]
     public class DynamoController : Controller
     {
         private readonly IAmazonDynamoDB _client;
+        public DynamoController(IAmazonDynamoDB client) => _client = client;
 
-        public DynamoController(IAmazonDynamoDB client)
-        {
-            _client = client;
-        }
-
-        [HttpGet("Tables")]
+        [HttpGet]
         public async Task<IActionResult> GetTablesAsync()
         {
             var result = await _client.GetTableNamesAsync();
             return Ok(result);
         }
 
-        [HttpPost("Tables")]
+        [HttpPost]
         public async Task<IActionResult> CreateTablesAsync()
         {
             await _client.CreateTablesAsync(Assembly.GetExecutingAssembly());
             return Ok();
         }
 
-        [HttpDelete("Tables")]
+        [HttpDelete]
         public async Task<IActionResult> DeleteTablesAsync()
         {
             await _client.DeleteTablesAsync();
