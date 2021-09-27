@@ -64,7 +64,7 @@ namespace Vegas.Database.DynamoDB.Extensions
             };
 
             var secondaryIndexProperties = typeOfEntity.GetProperties()
-                .Where(x => x.GetCustomAttribute<DynamoDBGlobalSecondaryIndexHashKeyAttribute>() is not null);
+                .Where(x => x.GetCustomAttribute<DynamoDBGlobalSecondaryIndexHashKeyAttribute>() != null);
             if (secondaryIndexProperties.Any())
             {
                 request.GlobalSecondaryIndexes = new List<GlobalSecondaryIndex>();
