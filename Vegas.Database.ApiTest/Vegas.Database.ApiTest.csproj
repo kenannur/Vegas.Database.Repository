@@ -14,10 +14,12 @@
     <None Remove="Controllers\" />
     <None Remove="Entities\" />
     <None Remove="Amazon.Extensions.Configuration.SystemsManager" />
+    <None Remove="Repositories\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
     <Folder Include="Entities\" />
+    <Folder Include="Repositories\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Vegas.Database.DynamoDB\Vegas.Database.DynamoDB.csproj">

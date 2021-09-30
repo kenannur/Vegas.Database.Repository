@@ -6,11 +6,13 @@ using Vegas.Database.DynamoDB.Extensions;
 
 namespace Vegas.Database.ApiTest.Controllers
 {
-    [Route("[controller]/Tables")]
-    public class DynamoController : Controller
+    [Route("[controller]")]
+    [ApiController]
+    public class DynamoTablesController : ControllerBase
     {
         private readonly IAmazonDynamoDB _client;
-        public DynamoController(IAmazonDynamoDB client) => _client = client;
+        public DynamoTablesController(IAmazonDynamoDB client)
+            => (_client) = (client);
 
         [HttpGet]
         public async Task<IActionResult> GetTablesAsync()

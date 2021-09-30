@@ -1,13 +1,11 @@
-﻿using System.Reflection;
-using Amazon.DynamoDBv2;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Vegas.Database.ApiTest.Repositories;
 using Vegas.Database.DynamoDB.DependencyInjection;
-using Vegas.Database.DynamoDB.Extensions;
 using Vegas.Database.DynamoDB.Setting;
 
 namespace Vegas.Database.ApiTest
@@ -30,6 +28,7 @@ namespace Vegas.Database.ApiTest
                 SecretKey = Configuration.GetValue<string>("AWSSettings:SecretKey"),
                 Region = Configuration.GetValue<string>("AWSSettings:Region"),
             });
+            services.AddScoped<ICityRepository, CityRepository>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
