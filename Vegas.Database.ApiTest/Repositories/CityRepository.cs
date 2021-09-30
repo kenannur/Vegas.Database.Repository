@@ -19,10 +19,5 @@ namespace Vegas.Database.ApiTest.Repositories
                                       .GetRemainingAsync();
             return result;
         }
-
-        public async Task<City> GetCityByByBaseIdAndNameAsync(string baseId, string name)
-        {
-            return await Context.LoadAsync<City>(baseId, name);
-        }
     }
 }

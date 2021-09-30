@@ -8,7 +8,5 @@ namespace Vegas.Database.ApiTest.Repositories
     public interface ICityRepository : IDynamoAsyncRepository<City>
     {
         Task<List<City>> GetCitiesByBaseIdAsync(string baseId);
-
-        Task<City> GetCityByByBaseIdAndNameAsync(string baseId, string name);
     }
 }

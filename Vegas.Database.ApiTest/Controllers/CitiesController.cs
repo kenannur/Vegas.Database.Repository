@@ -28,7 +28,7 @@ namespace Vegas.Database.ApiTest.Controllers
         [HttpGet("ById")]
         public async Task<IActionResult> GetCityAsync([FromQuery] string baseId, [FromQuery] string name)
         {
-            var city = await _cityRepository.GetCityByByBaseIdAndNameAsync(baseId, name);
+            var city = await _cityRepository.GetAsync(baseId, name);
             return Ok(city);
         }
 
