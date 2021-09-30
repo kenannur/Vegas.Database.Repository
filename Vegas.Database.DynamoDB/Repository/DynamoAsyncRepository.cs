@@ -12,6 +12,7 @@ namespace Vegas.Database.DynamoDB.Repository
     {
         protected readonly IAmazonDynamoDB Client;
         protected readonly IDynamoDBContext Context;
+        protected const string KeySeperator = "#"; 
 
         public DynamoAsyncRepository(IAmazonDynamoDB client, IDynamoDBContext context)
         {
@@ -35,6 +36,11 @@ namespace Vegas.Database.DynamoDB.Repository
 
         public async Task DeleteAsync(string id, CancellationToken ct = default)
         {
+            if (id.Contains(KeySeperator))
+            {
+                var (hashKey, rangeKey) = SplitId(id);
+                await Context.DeleteAsync<TEntity>(hashKey, rangeKey, ct);
+            }
             await Context.DeleteAsync<TEntity>(id, ct);
         }
 
@@ -48,6 +54,11 @@ namespace Vegas.Database.DynamoDB.Repository
 
         public async Task<TEntity> GetAsync(string id, CancellationToken ct = default)
         {
+            if (id.Contains(KeySeperator))
+            {
+                var (hashKey, rangeKey) = SplitId(id);
+                return await Context.LoadAsync<TEntity>(hashKey, rangeKey, ct);
+            }
             return await Context.LoadAsync<TEntity>(id, ct);
         }
 
@@ -55,6 +66,14 @@ namespace Vegas.Database.DynamoDB.Repository
         {
             await Context.SaveAsync(entity, ct);
             return entity;
+        }
+
+        private (string hashKey, string rangeKey) SplitId(string id)
+        {
+            var splittedKeys = id.Split(KeySeperator);
+            var hashKey = splittedKeys[0];
+            var rangeKey = splittedKeys[1];
+            return (hashKey, rangeKey);
         }
     }
 }
