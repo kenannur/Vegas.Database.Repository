@@ -4,7 +4,7 @@ using Vegas.Database.DynamoDB.Entity;
 
 namespace Vegas.Database.ApiTest.Entities
 {
-    public class User : DynamoEntity
+    public class User : DynamoDefaultEntity
     {
         public bool IsActive { get; set; }
 
