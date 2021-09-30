@@ -27,7 +27,7 @@ namespace Vegas.Database.DynamoDB.Extensions
         public static async Task CreateTablesAsync(this IAmazonDynamoDB client, Assembly assembly)
         {
             var tableNames = await GetTableNamesAsync(client);
-            var typeOfEntities = assembly.GetTypes().Where(type => typeof(IDynamoEntity).IsAssignableFrom(type));
+            var typeOfEntities = assembly.GetTypes().Where(type => typeof(IDynamoEntity).IsAssignableFrom(type) && type.IsClass);
             foreach (var typeOfEntity in typeOfEntities)
             {
                 if (tableNames.Contains(typeOfEntity.Name))
