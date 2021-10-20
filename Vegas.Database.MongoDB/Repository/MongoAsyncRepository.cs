@@ -44,11 +44,36 @@ namespace Vegas.Database.MongoDB.Repository
             return await Context.Collection<TEntity>().Find(x => x.Id == id).FirstOrDefaultAsync(ct);
         }
 
+        /// <summary>
+        /// Replaces the entity according to the entity id
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
         public async Task<TEntity> UpdateAsync(TEntity entity, CancellationToken ct = default)
         {
             ThrowIfNull(entity);
             await Context.Collection<TEntity>().ReplaceOneAsync(x => x.Id == entity.Id, entity, new ReplaceOptions(), ct);
             return entity;
+        }
+
+        /// <summary>
+        /// Updates specified fields atomically according to the id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="update"></param>
+        /// <param name="ct"></param>
+        /// <returns></returns>
+        public async Task<TEntity> UpdateAsync(string id, UpdateDefinition<TEntity> update, CancellationToken ct = default)
+        {
+            ThrowIfNull(id);
+            ThrowIfNull(update);
+            var options = new FindOneAndUpdateOptions<TEntity>
+            {
+                ReturnDocument = ReturnDocument.After
+            };
+            return await Context.Collection<TEntity>()
+                                .FindOneAndUpdateAsync<TEntity>(x => x.Id == id, update, options, ct);
         }
 
         private static void ThrowIfNull(object obj)
