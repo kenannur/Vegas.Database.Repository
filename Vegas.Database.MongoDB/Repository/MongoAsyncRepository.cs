@@ -10,7 +10,7 @@ using Vegas.Database.MongoDB.Entity;
 namespace Vegas.Database.MongoDB.Repository
 {
     public class MongoAsyncRepository<TEntity> : IMongoAsyncRepository<TEntity>
-        where TEntity : MongoEntity
+        where TEntity : class, IMongoEntity
     {
         protected readonly MongoDbContext Context;
         public MongoAsyncRepository(MongoDbContext dbContext) => Context = dbContext;

@@ -1,10 +1,9 @@
 ﻿using System;
 using MongoDB.Bson.Serialization.Attributes;
-using Vegas.Database.Abstraction.Entity;
 
 namespace Vegas.Database.MongoDB.Entity
 {
-    public abstract class MongoEntity : IEntity<string>
+    public abstract class MongoEntity : IMongoEntity
     {
         [BsonId]
         public string Id { get; set; }
