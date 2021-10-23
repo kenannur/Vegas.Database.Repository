@@ -24,13 +24,6 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Entity\" />
-    <Folder Include="Context\" />
-    <Folder Include="DependencyInjection\" />
-    <Folder Include="Repository\" />
-    <Folder Include="Extensions\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Vegas.Database.Abstraction\Vegas.Database.Abstraction.csproj" />
   </ItemGroup>
 </Project>
