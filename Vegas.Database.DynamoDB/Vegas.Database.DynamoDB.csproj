@@ -7,7 +7,7 @@
     <Title>Vegas.Database.DynamoDB</Title>
     <PackageId>Vegas.Database.DynamoDB</PackageId>
     <RepositoryUrl>https://github.com/kenannur/Vegas.Database.Repository</RepositoryUrl>
-    <PackageVersion>1.1.4</PackageVersion>
+    <PackageVersion>1.1.5</PackageVersion>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="DependencyInjection\" />
