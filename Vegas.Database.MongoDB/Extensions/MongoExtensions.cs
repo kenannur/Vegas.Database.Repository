@@ -5,14 +5,9 @@ namespace Vegas.Database.MongoDB.Extensions
 {
     public static class MongoExtensions
     {
-        public static ObjectId? ToObjectId(this string str)
+        public static ObjectId ToObjectId(this string str)
         {
-            if (ObjectId.TryParse(str, out ObjectId objectId))
-            {
-                return objectId;
-            }
-            return null;
-            
+            return ObjectId.TryParse(str, out ObjectId objectId) ? objectId : ObjectId.Empty;
         }
 
         public static IFindFluent<TEntity, TEntity> NextPage<TEntity>(
