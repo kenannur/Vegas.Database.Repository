@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Amazon.DynamoDBv2;
@@ -33,7 +34,7 @@ namespace Vegas.Database.DynamoDB.Repository
             }
         }
 
-        public async Task DeleteAsync(string id, CancellationToken ct = default)
+        public async Task DeleteAsync(Guid id, CancellationToken ct = default)
         {
             await Context.DeleteAsync<TEntity>(id, ct);
         }
@@ -43,7 +44,7 @@ namespace Vegas.Database.DynamoDB.Repository
             await Context.DeleteAsync<TEntity>(hashKey, rangeKey, ct);
         }
 
-        public async Task DeleteManyAsync(IEnumerable<string> ids, CancellationToken ct = default)
+        public async Task DeleteManyAsync(IEnumerable<Guid> ids, CancellationToken ct = default)
         {
             foreach (var id in ids)
             {
@@ -51,7 +52,7 @@ namespace Vegas.Database.DynamoDB.Repository
             }
         }
 
-        public async Task<TEntity> GetAsync(string id, CancellationToken ct = default)
+        public async Task<TEntity> GetAsync(Guid id, CancellationToken ct = default)
         {
             return await Context.LoadAsync<TEntity>(id, ct);
         }

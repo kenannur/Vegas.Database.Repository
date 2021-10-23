@@ -39,21 +39,21 @@ namespace Vegas.Database.ApiTest.Controllers
             {
                 new City
                 {
-                    Id = Guid.NewGuid().ToString(),
+                    Id = Guid.NewGuid(),
                     CreatedDate = DateTime.Now,
                     Name = "İstanbul",
                     BaseId = "123"
                 },
                 new City
                 {
-                    Id = Guid.NewGuid().ToString(),
+                    Id = Guid.NewGuid(),
                     CreatedDate = DateTime.Now,
                     Name = "İzmir",
                     BaseId = "123"
                 },
                 new City
                 {
-                    Id = Guid.NewGuid().ToString(),
+                    Id = Guid.NewGuid(),
                     CreatedDate = DateTime.Now,
                     Name = "Kavala",
                     BaseId = "456"

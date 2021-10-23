@@ -1,12 +1,20 @@
 ﻿using System;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using Vegas.Database.Abstraction.Entity;
 
 namespace Vegas.Database.MongoDB.Entity
 {
+    public interface IMongoEntity : IEntity<ObjectId>
+    { }
+
     public abstract class MongoEntity : IMongoEntity
     {
+        /// <summary>
+        /// Default Mongo primary key type
+        /// </summary>
         [BsonId]
-        public string Id { get; set; }
+        public ObjectId Id { get; set; }
 
         /// <summary>
         /// BsonDateTimeOptions(Kind = DateTimeKind.Local) -> DB'de UTC olarak tutulacak.

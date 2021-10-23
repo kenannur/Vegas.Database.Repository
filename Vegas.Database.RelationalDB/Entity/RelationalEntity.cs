@@ -3,7 +3,10 @@ using Vegas.Database.Abstraction.Entity;
 
 namespace Vegas.Database.RelationalDB.Entity
 {
-    public class RelationalEntity : IEntity<long>
+    public interface IRelationalEntity : IEntity<long>
+    { }
+
+    public class RelationalEntity : IRelationalEntity
     {
         public long Id { get; set; }
 

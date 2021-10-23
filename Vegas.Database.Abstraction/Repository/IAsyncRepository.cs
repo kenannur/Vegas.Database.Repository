@@ -6,7 +6,8 @@ using Vegas.Database.Abstraction.Entity;
 namespace Vegas.Database.Abstraction.Repository
 {
     public interface IAsyncRepository<TEntity, TId>
-        where TEntity : class, IEntity<TId>
+        where TEntity : IEntity<TId>
+        where TId : struct
     {
         Task<TEntity> AddAsync(TEntity entity, CancellationToken ct = default);
 
