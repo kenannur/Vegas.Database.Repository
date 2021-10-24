@@ -8,7 +8,7 @@ using Vegas.Database.MongoDB.Entity;
 namespace Vegas.Database.MongoDB.Repository
 {
     public interface IMongoAsyncRepository<TEntity> : IAsyncRepository<TEntity, string>
-        where TEntity : MongoEntity
+        where TEntity : class, IMongoEntity
     {
         Task<TEntity> UpdateAsync(string id, UpdateDefinition<TEntity> update, CancellationToken ct = default);
 
