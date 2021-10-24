@@ -5,7 +5,7 @@ using Vegas.Database.Abstraction.Entity;
 
 namespace Vegas.Database.MongoDB.Entity
 {
-    public interface IMongoEntity : IEntity<ObjectId>
+    public interface IMongoEntity : IEntity<string>
     { }
 
     public abstract class MongoEntity : IMongoEntity
@@ -13,8 +13,8 @@ namespace Vegas.Database.MongoDB.Entity
         /// <summary>
         /// Default Mongo primary key type
         /// </summary>
-        [BsonId]
-        public ObjectId Id { get; set; }
+        [BsonId, BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
 
         /// <summary>
         /// BsonDateTimeOptions(Kind = DateTimeKind.Local) -> DB'de UTC olarak tutulacak.

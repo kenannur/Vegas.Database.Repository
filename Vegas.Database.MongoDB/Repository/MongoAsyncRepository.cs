@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using MongoDB.Bson;
 using MongoDB.Driver;
 using Vegas.Database.MongoDB.Context;
 using Vegas.Database.MongoDB.Entity;
@@ -11,7 +10,7 @@ using Vegas.Database.MongoDB.Entity;
 namespace Vegas.Database.MongoDB.Repository
 {
     public class MongoAsyncRepository<TEntity> : IMongoAsyncRepository<TEntity>
-        where TEntity : class, IMongoEntity
+        where TEntity : MongoEntity
     {
         protected readonly MongoDbContext Context;
         public MongoAsyncRepository(MongoDbContext dbContext) => Context = dbContext;
@@ -29,17 +28,17 @@ namespace Vegas.Database.MongoDB.Repository
             await Context.Collection<TEntity>().InsertManyAsync(entities, default, ct);
         }
 
-        public async Task DeleteAsync(ObjectId id, CancellationToken ct = default)
+        public async Task DeleteAsync(string id, CancellationToken ct = default)
         {
             await Context.Collection<TEntity>().DeleteOneAsync(x => x.Id == id, ct);
         }
 
-        public async Task DeleteManyAsync(IEnumerable<ObjectId> ids, CancellationToken ct = default)
+        public async Task DeleteManyAsync(IEnumerable<string> ids, CancellationToken ct = default)
         {
             await Context.Collection<TEntity>().DeleteManyAsync(x => ids.Contains(x.Id), default, ct);
         }
 
-        public virtual async Task<TEntity> GetAsync(ObjectId id, CancellationToken ct = default)
+        public virtual async Task<TEntity> GetAsync(string id, CancellationToken ct = default)
         {
             ThrowIfNull(id);
             return await Context.Collection<TEntity>().Find(x => x.Id == id).FirstOrDefaultAsync(ct);
@@ -65,16 +64,15 @@ namespace Vegas.Database.MongoDB.Repository
         /// <param name="update"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<TEntity> UpdateAsync(ObjectId id, UpdateDefinition<TEntity> update, CancellationToken ct = default)
+        public async Task<TEntity> UpdateAsync(string id, UpdateDefinition<TEntity> update, CancellationToken ct = default)
         {
             ThrowIfNull(id);
             ThrowIfNull(update);
-            var options = new FindOneAndUpdateOptions<TEntity>
-            {
-                ReturnDocument = ReturnDocument.After
-            };
             return await Context.Collection<TEntity>()
-                                .FindOneAndUpdateAsync<TEntity>(x => x.Id == id, update, options, ct);
+                .FindOneAndUpdateAsync<TEntity>(x => x.Id == id, update, new FindOneAndUpdateOptions<TEntity>
+                {
+                    ReturnDocument = ReturnDocument.After
+                }, ct);
         }
 
         public async Task<List<TEntity>> GetAllAsync(CancellationToken ct = default)

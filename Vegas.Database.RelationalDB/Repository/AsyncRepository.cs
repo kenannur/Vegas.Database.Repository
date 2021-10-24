@@ -9,7 +9,7 @@ using Vegas.Database.RelationalDB.Entity;
 namespace Vegas.Database.RelationalDB.Repository
 {
     public class AsyncRepository<TEntity> : IAsyncRepository<TEntity>
-        where TEntity : class, IRelationalEntity
+        where TEntity : RelationalEntity
     {
         protected readonly DbContext Context;
         public AsyncRepository(DbContext context) => Context = context;

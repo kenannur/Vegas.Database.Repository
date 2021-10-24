@@ -4,6 +4,6 @@ using Vegas.Database.RelationalDB.Entity;
 namespace Vegas.Database.RelationalDB.Repository
 {
     public interface IAsyncRepository<TEntity> : IAsyncRepository<TEntity, long>
-        where TEntity : class, IRelationalEntity
+        where TEntity : RelationalEntity
     { }
 }
