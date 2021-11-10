@@ -12,6 +12,29 @@ namespace Vegas.Database.MongoDB.DependencyInjection
     {
         public static void AddMongoAsyncRepository(this IServiceCollection services, string connectionString, string dbName)
         {
+            NullChecks(services, connectionString, dbName);
+            EnumToStringConvention();
+
+            // It is recommended to store a MongoClient instance in a global place,
+            // either as a static variable or in an IoC container with a singleton lifetime.
+            services.AddSingleton<IMongoClient>(sp => new MongoClient(connectionString));
+            services.AddScoped(sp => new MongoDbContext(sp.GetRequiredService<IMongoClient>().GetDatabase(dbName)));
+            services.AddScoped(typeof(IMongoAsyncRepository<>), typeof(MongoAsyncRepository<>));
+        }
+
+        public static void AddMongoAsyncRepository(this IServiceCollection services, string url)
+        {
+            NullChecks(services, url, "test");
+            EnumToStringConvention();
+
+            var mongoUrl = new MongoUrl(url);
+            services.AddSingleton<IMongoClient>(sp => new MongoClient(mongoUrl));
+            services.AddScoped(sp => new MongoDbContext(sp.GetRequiredService<IMongoClient>().GetDatabase(mongoUrl.DatabaseName)));
+            services.AddScoped(typeof(IMongoAsyncRepository<>), typeof(MongoAsyncRepository<>));
+        }
+
+        private static void NullChecks(IServiceCollection services, string connectionString, string dbName)
+        {
             if (services is null)
             {
                 throw new ArgumentNullException(nameof(services));
@@ -24,17 +47,14 @@ namespace Vegas.Database.MongoDB.DependencyInjection
             {
                 throw new ArgumentNullException(nameof(dbName));
             }
+        }
 
+        private static void EnumToStringConvention()
+        {
             ConventionRegistry.Register("EnumStringConvention", new ConventionPack
             {
                 new EnumRepresentationConvention(BsonType.String)
             }, type => true);
-
-            // It is recommended to store a MongoClient instance in a global place,
-            // either as a static variable or in an IoC container with a singleton lifetime.
-            services.AddSingleton<IMongoClient>(sp => new MongoClient(connectionString));
-            services.AddScoped(sp => new MongoDbContext(sp.GetRequiredService<IMongoClient>().GetDatabase(dbName)));
-            services.AddScoped(typeof(IMongoAsyncRepository<>), typeof(MongoAsyncRepository<>));
         }
     }
 }
