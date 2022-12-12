@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Conventions;
@@ -18,7 +19,12 @@ namespace Vegas.Database.MongoDB.DependencyInjection
             // It is recommended to store a MongoClient instance in a global place,
             // either as a static variable or in an IoC container with a singleton lifetime.
             services.AddSingleton<IMongoClient>(sp => new MongoClient(connectionString));
-            services.AddScoped(sp => new MongoDbContext(sp.GetRequiredService<IMongoClient>().GetDatabase(dbName)));
+
+            services.AddScoped<IMongoDbContext, MongoDbContext>(sp =>
+            {
+                return new MongoDbContext(sp.GetRequiredService<IMongoClient>().GetDatabase(dbName));
+            });
+
             services.AddScoped(typeof(IMongoAsyncRepository<>), typeof(MongoAsyncRepository<>));
         }
 
@@ -29,7 +35,10 @@ namespace Vegas.Database.MongoDB.DependencyInjection
 
             var mongoUrl = new MongoUrl(url);
             services.AddSingleton<IMongoClient>(sp => new MongoClient(mongoUrl));
-            services.AddScoped(sp => new MongoDbContext(sp.GetRequiredService<IMongoClient>().GetDatabase(mongoUrl.DatabaseName)));
+            services.AddScoped<IMongoDbContext, MongoDbContext>(sp =>
+            {
+                return new MongoDbContext(sp.GetRequiredService<IMongoClient>().GetDatabase(mongoUrl.DatabaseName));
+            });
             services.AddScoped(typeof(IMongoAsyncRepository<>), typeof(MongoAsyncRepository<>));
         }
 

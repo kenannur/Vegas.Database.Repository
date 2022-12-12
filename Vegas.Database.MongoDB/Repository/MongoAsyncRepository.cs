@@ -12,8 +12,8 @@ namespace Vegas.Database.MongoDB.Repository
     public class MongoAsyncRepository<TEntity> : IMongoAsyncRepository<TEntity>
         where TEntity : class, IMongoEntity
     {
-        protected readonly MongoDbContext Context;
-        public MongoAsyncRepository(MongoDbContext dbContext) => Context = dbContext;
+        protected readonly IMongoDbContext Context;
+        public MongoAsyncRepository(IMongoDbContext dbContext) => Context = dbContext;
 
         public async Task<TEntity> AddAsync(TEntity entity, CancellationToken ct = default)
         {

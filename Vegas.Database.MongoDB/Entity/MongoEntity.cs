@@ -10,17 +10,10 @@ namespace Vegas.Database.MongoDB.Entity
 
     public abstract class MongoEntity : IMongoEntity
     {
-        /// <summary>
-        /// Default Mongo primary key type
-        /// </summary>
         [BsonId, BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
 
-        /// <summary>
-        /// BsonDateTimeOptions(Kind = DateTimeKind.Local) -> DB'de UTC olarak tutulacak.
-        /// Deserialize ederken local time'a otomatik çevrilecek
-        /// </summary>
-        [BsonIgnoreIfNull, BsonDateTimeOptions(Kind = DateTimeKind.Local)]
+        [BsonIgnoreIfNull, BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
         public DateTime? CreatedDate { get; set; }
     }
 }
